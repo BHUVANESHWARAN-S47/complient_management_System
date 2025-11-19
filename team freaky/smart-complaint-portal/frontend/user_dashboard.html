@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard - Smart Complaint Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white shadow-sm">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-gradient-to-r from-blue-600 to-cyan-700 text-white font-bold text-xl p-2 rounded-lg">
+                            <i class="fas fa-user"></i> SC
+                        </div>
+                        <h1 class="text-xl font-bold text-gray-800">My Dashboard</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="p-2 text-gray-600 hover:text-gray-900 rounded-full hover:bg-gray-100">
+                            <i class="fas fa-bell"></i>
+                        </button>
+                        <div class="relative">
+                            <button class="flex items-center space-x-2 focus:outline-none">
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-cyan-600 flex items-center justify-center text-white font-bold">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium hidden md:inline" id="userName">User</span>
+                            </button>
+                        </div>
+                        <button id="logoutBtn" class="ml-2 bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-4 py-2 rounded-lg hover:from-blue-600 hover:to-cyan-700 transition duration-300">
+                            <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="flex flex-1">
+            <!-- Sidebar -->
+            <aside class="w-64 bg-white shadow-md hidden md:block">
+                <nav class="p-4">
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="sidebar-link flex items-center space-x-3 p-3 rounded-lg bg-blue-50 text-blue-600 font-medium" data-section="overview">
+                                <i class="fas fa-home"></i>
+                                <span>My Complaints</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="sidebar-link flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100" data-section="submit">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Submit Complaint</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="sidebar-link flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100" data-section="tracking">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Track Status</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="sidebar-link flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100" data-section="profile">
+                                <i class="fas fa-user-circle"></i>
+                                <span>My Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="sidebar-link flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100" data-section="volunteer">
+                                <i class="fas fa-hands-helping"></i>
+                                <span>Become a Volunteer</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="flex-1 p-6 overflow-auto">
+                <!-- Overview Section -->
+                <div id="overviewSection">
+                    <div class="mb-8">
+                        <h1 class="text-2xl font-bold text-gray-800">My Complaints</h1>
+                        <p class="text-gray-600">Track and manage your submitted complaints</p>
+                    </div>
+
+                    <!-- Personal Metrics -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white rounded-xl shadow p-6">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-gray-600 text-sm font-medium">Total Complaints</p>
+                                    <p class="text-3xl font-bold text-gray-800 mt-2" id="myTotalComplaints">0</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                                    <i class="fas fa-inbox text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow p-6">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-gray-600 text-sm font-medium">Active</p>
+                                    <p class="text-3xl font-bold text-gray-800 mt-2" id="myActiveComplaints">0</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
+                                    <i class="fas fa-clock text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow p-6">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-gray-600 text-sm font-medium">Resolved</p>
+                                    <p class="text-3xl font-bold text-gray-800 mt-2" id="myResolvedComplaints">0</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-green-100 text-green-600">
+                                    <i class="fas fa-check-circle text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Complaints List -->
+                    <div class="bg-white rounded-xl shadow p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-xl font-bold text-gray-800">My Complaints</h2>
+                            <button onclick="showSection('submit')" class="bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-4 py-2 rounded-lg hover:from-blue-600 hover:to-cyan-700">
+                                <i class="fas fa-plus mr-2"></i>New Complaint
+                            </button>
+                        </div>
+                        <div id="complaintsContainer">
+                            <!-- Complaints will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Complaint Section -->
+                <div id="submitSection" class="hidden">
+                    <div class="mb-8">
+                        <h1 class="text-2xl font-bold text-gray-800">Submit a Complaint</h1>
+                        <p class="text-gray-600">Our AI will help categorize and route your complaint</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow p-8">
+                        <form id="complaintForm" class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Complaint Title</label>
+                                <input type="text" id="complaintTitle" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Brief description of the issue">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                                <textarea id="complaintDescription" rows="5" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Describe your complaint in detail..."></textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                                <select id="complaintCategory" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="">Select a category</option>
+                                    <option value="sanitation">Sanitation</option>
+                                    <option value="traffic">Traffic</option>
+                                    <option value="infrastructure">Infrastructure</option>
+                                    <option value="public_safety">Public Safety</option>
+                                    <option value="utilities">Utilities</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                                <div class="flex justify-between items-center mb-3">
+                                    <h3 class="font-bold text-blue-800">AI-Powered Assistance</h3>
+                                    <span class="px-2 py-1 text-xs bg-blue-200 text-blue-800 rounded-full">ML</span>
+                                </div>
+                                <div id="mlPrediction" class="space-y-2">
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-700">Predicted Category:</span>
+                                        <span id="predictedCategory" class="font-medium">-</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-700">Confidence:</span>
+                                        <span id="mlConfidence" class="font-medium">-</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Latitude</label>
+                                    <input type="number" step="any" id="latitude" placeholder="0.0"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Longitude</label>
+                                    <input type="number" step="any" id="longitude" placeholder="0.0"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                </div>
+                            </div>
+
+                            <div class="flex justify-end space-x-4">
+                                <button type="button" onclick="showSection('overview')"
+                                    class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                                    Cancel
+                                </button>
+                                <button type="submit"
+                                    class="bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-6 py-3 rounded-lg hover:from-blue-600 hover:to-cyan-700">
+                                    <i class="fas fa-paper-plane mr-2"></i>Submit Complaint
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Track Status Section -->
+                <div id="trackingSection" class="hidden">
+                    <div class="mb-8">
+                        <h1 class="text-2xl font-bold text-gray-800">Track Complaint Status</h1>
+                        <p class="text-gray-600">Monitor the progress of your submitted complaints</p>
+                    </div>
+
+                    <!-- Status Overview Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white rounded-xl shadow p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                                    <i class="fas fa-file-alt text-xl"></i>
+                                </div>
+                                <span class="text-2xl font-bold text-gray-800" id="statusSubmitted">0</span>
+                            </div>
+                            <p class="text-gray-600 text-sm font-medium">Submitted</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
+                                    <i class="fas fa-hourglass-half text-xl"></i>
+                                </div>
+                                <span class="text-2xl font-bold text-gray-800" id="statusInProgress">0</span>
+                            </div>
+                            <p class="text-gray-600 text-sm font-medium">In Progress</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 rounded-full bg-green-100 text-green-600">
+                                    <i class="fas fa-check-circle text-xl"></i>
+                                </div>
+                                <span class="text-2xl font-bold text-gray-800" id="statusResolved">0</span>
+                            </div>
+                            <p class="text-gray-600 text-sm font-medium">Resolved</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 rounded-full bg-red-100 text-red-600">
+                                    <i class="fas fa-times-circle text-xl"></i>
+                                </div>
+                                <span class="text-2xl font-bold text-gray-800" id="statusRejected">0</span>
+                            </div>
+                            <p class="text-gray-600 text-sm font-medium">Rejected</p>
+                        </div>
+                    </div>
+
+                    <!-- Status Chart -->
+                    <div class="bg-white rounded-xl shadow p-6 mb-8">
+                        <h2 class="text-xl font-bold text-gray-800 mb-6">Complaint Status Distribution</h2>
+                        <div class="relative h-64" id="statusChartContainer">
+                            <!-- Simple Bar Chart -->
+                            <div class="flex items-end justify-around h-full space-x-4">
+                                <div class="flex flex-col items-center w-1/4">
+                                    <div class="w-full bg-blue-500 rounded-t-lg transition-all duration-500" id="barSubmitted" style="height: 0%"></div>
+                                    <p class="text-sm text-gray-600 mt-2">Submitted</p>
+                                </div>
+                                <div class="flex flex-col items-center w-1/4">
+                                    <div class="w-full bg-yellow-500 rounded-t-lg transition-all duration-500" id="barInProgress" style="height: 0%"></div>
+                                    <p class="text-sm text-gray-600 mt-2">In Progress</p>
+                                </div>
+                                <div class="flex flex-col items-center w-1/4">
+                                    <div class="w-full bg-green-500 rounded-t-lg transition-all duration-500" id="barResolved" style="height: 0%"></div>
+                                    <p class="text-sm text-gray-600 mt-2">Resolved</p>
+                                </div>
+                                <div class="flex flex-col items-center w-1/4">
+                                    <div class="w-full bg-red-500 rounded-t-lg transition-all duration-500" id="barRejected" style="height: 0%"></div>
+                                    <p class="text-sm text-gray-600 mt-2">Rejected</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Status Timeline -->
+                    <div class="bg-white rounded-xl shadow p-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-6">Recent Status Updates</h2>
+                        <div id="statusTimeline" class="space-y-4">
+                            <!-- Timeline will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Section -->
+                <div id="profileSection" class="hidden">
+                    <div class="mb-8">
+                        <h1 class="text-2xl font-bold text-gray-800">My Profile</h1>
+                        <p class="text-gray-600">Manage your account information</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow p-8">
+                        <form id="profileForm" class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                <input type="text" id="profileName"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                <input type="email" id="profileEmail"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                                <input type="tel" id="profilePhone"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div class="flex justify-end">
+                                <button type="submit"
+                                    class="bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-6 py-3 rounded-lg hover:from-blue-600 hover:to-cyan-700">
+                                    <i class="fas fa-save mr-2"></i>Save Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Volunteer Application Section -->
+                <div id="volunteerSection" class="hidden">
+                    <div class="mb-8">
+                        <h1 class="text-2xl font-bold text-gray-800">Volunteer Program</h1>
+                        <p class="text-gray-600">Help your community by verifying and resolving complaints</p>
+                    </div>
+
+                    <!-- Check if already a volunteer -->
+                    <div id="volunteerStatusCheck">
+                        <!-- Application Pending -->
+                        <div id="applicationPending" class="hidden">
+                            <div class="bg-white rounded-xl shadow p-8 text-center">
+                                <div class="mx-auto w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
+                                    <i class="fas fa-clock text-4xl text-yellow-600"></i>
+                                </div>
+                                <h2 class="text-2xl font-bold text-gray-800 mb-2">Application Pending</h2>
+                                <p class="text-gray-600 mb-4">Your volunteer application is under review by the admin.</p>
+                                <div class="inline-block bg-yellow-50 border border-yellow-200 rounded-lg px-6 py-3">
+                                    <p class="text-yellow-800 font-medium"><i class="fas fa-info-circle mr-2"></i>Please wait for admin approval</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Application Rejected -->
+                        <div id="applicationRejected" class="hidden">
+                            <div class="bg-white rounded-xl shadow p-8 text-center">
+                                <div class="mx-auto w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mb-4">
+                                    <i class="fas fa-times-circle text-4xl text-red-600"></i>
+                                </div>
+                                <h2 class="text-2xl font-bold text-gray-800 mb-2">Application Rejected</h2>
+                                <p class="text-gray-600 mb-4">Unfortunately, your volunteer application was not approved.</p>
+                                <div class="inline-block bg-red-50 border border-red-200 rounded-lg px-6 py-3 mb-4">
+                                    <p class="text-red-800 font-medium" id="rejectionReason"></p>
+                                </div>
+                                <button onclick="reapplyVolunteer()" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600">
+                                    <i class="fas fa-redo mr-2"></i>Apply Again
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Not a volunteer yet -->
+                        <div id="notVolunteerSection">
+                            <div class="bg-white rounded-xl shadow p-8 mb-6">
+                                <div class="text-center mb-8">
+                                    <div class="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                                        <i class="fas fa-hands-helping text-4xl text-green-600"></i>
+                                    </div>
+                                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Become a Volunteer</h2>
+                                    <p class="text-gray-600">Join our community of volunteers and make a difference</p>
+                                </div>
+
+                                <div class="mb-6">
+                                    <h3 class="text-lg font-bold text-gray-800 mb-4">Benefits of Volunteering:</h3>
+                                    <ul class="space-y-3 text-gray-600">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                            <span>Help verify complaints in your community</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                            <span>Contribute to faster resolution of local issues</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                            <span>Gain insights into local problems and solutions</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                            <span>Build a reputation as a trusted community member</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                            <span>Access to volunteer dashboard with verification tools</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <form id="volunteerForm" class="space-y-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Why do you want to volunteer?</label>
+                                        <textarea id="volunteerMotivation" rows="4" required
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                                            placeholder="Tell us your motivation..."></textarea>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Regions (comma-separated)</label>
+                                        <input type="text" id="volunteerRegions" placeholder="e.g., Downtown, Sector 7"
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Categories</label>
+                                        <select id="volunteerCategories" multiple
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                                            <option value="sanitation">Sanitation</option>
+                                            <option value="traffic">Traffic</option>
+                                            <option value="infrastructure">Infrastructure</option>
+                                            <option value="public_safety">Public Safety</option>
+                                        </select>
+                                        <p class="text-sm text-gray-500 mt-1">Hold Ctrl/Cmd to select multiple</p>
+                                    </div>
+                                    <div class="flex justify-center">
+                                        <button type="submit"
+                                            class="bg-gradient-to-r from-green-500 to-teal-600 text-white px-8 py-3 rounded-lg hover:from-green-600 hover:to-teal-700 text-lg font-medium">
+                                            <i class="fas fa-hands-helping mr-2"></i>Apply to Become a Volunteer
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Volunteer Dashboard (shown after becoming a volunteer) -->
+                        <div id="volunteerDashboard" class="hidden">
+                            <div class="bg-gradient-to-r from-green-500 to-teal-600 text-white rounded-xl p-6 mb-6">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h2 class="text-2xl font-bold mb-2">Welcome, Volunteer!</h2>
+                                        <p>Thank you for helping your community</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-sm opacity-90">Your Rating</p>
+                                        <p class="text-3xl font-bold">4.8 ⭐</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Volunteer Metrics -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                                <div class="bg-white rounded-xl shadow p-6">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div class="p-3 rounded-full bg-green-100 text-green-600">
+                                            <i class="fas fa-check-circle text-xl"></i>
+                                        </div>
+                                        <span class="text-2xl font-bold text-gray-800" id="volVerifiedToday">0</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm font-medium">Verified Today</p>
+                                </div>
+                                <div class="bg-white rounded-xl shadow p-6">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                                            <i class="fas fa-clipboard-check text-xl"></i>
+                                        </div>
+                                        <span class="text-2xl font-bold text-gray-800" id="volTotalVerified">0</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm font-medium">Total Verified</p>
+                                </div>
+                                <div class="bg-white rounded-xl shadow p-6">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
+                                            <i class="fas fa-clock text-xl"></i>
+                                        </div>
+                                        <span class="text-2xl font-bold text-gray-800" id="volPending">0</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm font-medium">Pending Review</p>
+                                </div>
+                            </div>
+
+                            <!-- Complaints to Verify -->
+                            <div class="bg-white rounded-xl shadow p-6 mb-6">
+                                <h3 class="text-xl font-bold text-gray-800 mb-4">Complaints to Verify</h3>
+                                <div id="complaintsToVerify" class="space-y-4">
+                                    <!-- Complaints will load here -->
+                                </div>
+                            </div>
+
+                            <!-- Verification History -->
+                            <div class="bg-white rounded-xl shadow p-6">
+                                <h3 class="text-xl font-bold text-gray-800 mb-4">Your Verification History</h3>
+                                <div id="verificationHistory" class="space-y-3">
+                                    <!-- History will load here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t border-gray-200 p-4">
+            <div class="container mx-auto text-center text-gray-600 text-sm">
+                <p>&copy; 2025 Smart Complaint Portal. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8001';
+        const token = localStorage.getItem('token');
+        const userRole = localStorage.getItem('userRole');
+        const username = localStorage.getItem('username');
+        const fullName = localStorage.getItem(`userFullName_${username}`);
+
+        if (!token || userRole !== 'user') {
+            window.location.href = 'login.html';
+        }
+
+        document.getElementById('userName').textContent = fullName || 'User';
+
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.clear();
+            window.location.href = 'login.html';
+        });
+
+        // Section navigation
+        const sections = {
+            overview: document.getElementById('overviewSection'),
+            submit: document.getElementById('submitSection'),
+            tracking: document.getElementById('trackingSection'),
+            profile: document.getElementById('profileSection'),
+            volunteer: document.getElementById('volunteerSection')
+        };
+
+        function showSection(sectionName) {
+            Object.values(sections).forEach(section => section.classList.add('hidden'));
+            if (sections[sectionName]) {
+                sections[sectionName].classList.remove('hidden');
+            }
+
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('bg-blue-50', 'text-blue-600', 'font-medium');
+                link.classList.add('text-gray-700');
+            });
+
+            const activeLink = document.querySelector(`[data-section="${sectionName}"]`);
+            if (activeLink) {
+                activeLink.classList.add('bg-blue-50', 'text-blue-600', 'font-medium');
+                activeLink.classList.remove('text-gray-700');
+            }
+
+            loadSectionData(sectionName);
+        }
+
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                showSection(this.dataset.section);
+            });
+        });
+
+        async function loadSectionData(sectionName) {
+            if (sectionName === 'overview') await loadMyComplaints();
+            if (sectionName === 'tracking') await loadTrackingData();
+            if (sectionName === 'volunteer') {
+                // Check volunteer status
+                const volunteerStatus = localStorage.getItem(`volunteerStatus_${username}`);
+                
+                // Hide all sections first
+                document.getElementById('notVolunteerSection').classList.add('hidden');
+                document.getElementById('applicationPending').classList.add('hidden');
+                document.getElementById('applicationRejected').classList.add('hidden');
+                document.getElementById('volunteerDashboard').classList.add('hidden');
+                
+                if (volunteerStatus === 'approved') {
+                    // Show volunteer dashboard
+                    document.getElementById('volunteerDashboard').classList.remove('hidden');
+                    await loadVolunteerData();
+                } else if (volunteerStatus === 'pending') {
+                    // Show pending message
+                    document.getElementById('applicationPending').classList.remove('hidden');
+                } else if (volunteerStatus === 'rejected') {
+                    // Show rejected message
+                    const reason = localStorage.getItem(`volunteerRejectionReason_${username}`) || 'No reason provided';
+                    document.getElementById('rejectionReason').textContent = reason;
+                    document.getElementById('applicationRejected').classList.remove('hidden');
+                } else {
+                    // Show application form
+                    document.getElementById('notVolunteerSection').classList.remove('hidden');
+                }
+            }
+            if (sectionName === 'profile') await loadProfile();
+        }
+
+        async function loadMyComplaints() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/citizen/complaints`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const complaints = await response.json();
+
+                document.getElementById('myTotalComplaints').textContent = complaints.length;
+                document.getElementById('myActiveComplaints').textContent = complaints.filter(c => !c.is_verified).length;
+                document.getElementById('myResolvedComplaints').textContent = complaints.filter(c => c.is_verified).length;
+
+                const container = document.getElementById('complaintsContainer');
+                if (complaints.length === 0) {
+                    container.innerHTML = '<p class="text-gray-500 text-center py-8">No complaints yet. Submit your first complaint!</p>';
+                } else {
+                    container.innerHTML = complaints.map(c => `
+                        <div class="border-b py-4 last:border-0">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-bold text-gray-800">${c.title}</h4>
+                                <span class="px-2 py-1 text-xs rounded-full ${c.is_verified ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
+                                    ${c.is_verified ? 'Resolved' : 'Active'}
+                                </span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-2">${c.description.substring(0, 100)}...</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-500">${new Date(c.created_at).toLocaleDateString()}</span>
+                                <span class="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded">${c.category}</span>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Error loading complaints:', error);
+            }
+        }
+
+        // Complaint submission
+        document.getElementById('complaintForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const data = {
+                title: document.getElementById('complaintTitle').value,
+                description: document.getElementById('complaintDescription').value,
+                category: document.getElementById('complaintCategory').value,
+                location: {
+                    lat: parseFloat(document.getElementById('latitude').value) || 0,
+                    lon: parseFloat(document.getElementById('longitude').value) || 0
+                }
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/citizen/complaints`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert('Complaint submitted successfully!');
+                    document.getElementById('complaintForm').reset();
+                    showSection('overview');
+                }
+            } catch (error) {
+                console.error('Error submitting complaint:', error);
+                alert('Error submitting complaint');
+            }
+        });
+
+        // Volunteer application
+        document.getElementById('volunteerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const regions = document.getElementById('volunteerRegions').value.split(',').map(r => r.trim());
+            const categories = Array.from(document.getElementById('volunteerCategories').selectedOptions).map(o => o.value);
+
+            const data = {
+                user_id: localStorage.getItem('userId'),
+                username: username,
+                fullname: fullName,
+                motivation: document.getElementById('volunteerMotivation').value,
+                preferred_regions: regions,
+                preferred_categories: categories,
+                status: 'pending',
+                applied_date: new Date().toISOString()
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/citizen/volunteer/apply`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    // Save application to localStorage with pending status
+                    const applications = JSON.parse(localStorage.getItem('volunteerApplications') || '[]');
+                    applications.push(data);
+                    localStorage.setItem('volunteerApplications', JSON.stringify(applications));
+                    localStorage.setItem(`volunteerStatus_${username}`, 'pending');
+                    
+                    alert('Application Submitted!\n\nYour volunteer application has been sent to the admin for review.');
+                    
+                    // Show pending status
+                    document.getElementById('notVolunteerSection').classList.add('hidden');
+                    document.getElementById('applicationPending').classList.remove('hidden');
+                    document.getElementById('volunteerForm').reset();
+                }
+            } catch (error) {
+                console.error('Error submitting application:', error);
+                // Save to localStorage even if API fails
+                const applications = JSON.parse(localStorage.getItem('volunteerApplications') || '[]');
+                applications.push(data);
+                localStorage.setItem('volunteerApplications', JSON.stringify(applications));
+                localStorage.setItem(`volunteerStatus_${username}`, 'pending');
+                
+                alert('Application Submitted!\n\nYour volunteer application has been sent to the admin for review.');
+                document.getElementById('notVolunteerSection').classList.add('hidden');
+                document.getElementById('applicationPending').classList.remove('hidden');
+            }
+        });
+
+        // Load profile
+        async function loadProfile() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/citizen/profile`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const profile = await response.json();
+
+                document.getElementById('profileName').value = profile.full_name;
+                document.getElementById('profileEmail').value = profile.email;
+                document.getElementById('profilePhone').value = profile.phone_number || '';
+            } catch (error) {
+                console.error('Error loading profile:', error);
+            }
+        }
+
+        // Profile update
+        document.getElementById('profileForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const data = {
+                full_name: document.getElementById('profileName').value,
+                email: document.getElementById('profileEmail').value,
+                phone_number: document.getElementById('profilePhone').value
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/citizen/profile`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert('Profile updated successfully!');
+                }
+            } catch (error) {
+                console.error('Error updating profile:', error);
+            }
+        });
+
+        // Load tracking data
+        async function loadTrackingData() {
+            try {
+                // Simulate complaint status data
+                const statusData = {
+                    submitted: Math.floor(Math.random() * 10) + 5,
+                    inProgress: Math.floor(Math.random() * 8) + 3,
+                    resolved: Math.floor(Math.random() * 15) + 10,
+                    rejected: Math.floor(Math.random() * 5) + 1
+                };
+
+                // Update status cards
+                document.getElementById('statusSubmitted').textContent = statusData.submitted;
+                document.getElementById('statusInProgress').textContent = statusData.inProgress;
+                document.getElementById('statusResolved').textContent = statusData.resolved;
+                document.getElementById('statusRejected').textContent = statusData.rejected;
+
+                // Calculate percentages for chart
+                const total = statusData.submitted + statusData.inProgress + statusData.resolved + statusData.rejected;
+                const submittedPercent = (statusData.submitted / total * 100).toFixed(0);
+                const inProgressPercent = (statusData.inProgress / total * 100).toFixed(0);
+                const resolvedPercent = (statusData.resolved / total * 100).toFixed(0);
+                const rejectedPercent = (statusData.rejected / total * 100).toFixed(0);
+
+                // Animate chart bars
+                setTimeout(() => {
+                    document.getElementById('barSubmitted').style.height = submittedPercent + '%';
+                    document.getElementById('barInProgress').style.height = inProgressPercent + '%';
+                    document.getElementById('barResolved').style.height = resolvedPercent + '%';
+                    document.getElementById('barRejected').style.height = rejectedPercent + '%';
+                }, 100);
+
+                // Load timeline data
+                const timeline = [
+                    { id: 'C001', title: 'Street Light Issue', status: 'Resolved', date: '2 days ago', icon: 'fa-check-circle', color: 'green' },
+                    { id: 'C002', title: 'Pothole on Main Street', status: 'In Progress', date: '5 days ago', icon: 'fa-hourglass-half', color: 'yellow' },
+                    { id: 'C003', title: 'Garbage Collection Delay', status: 'Submitted', date: '1 week ago', icon: 'fa-file-alt', color: 'blue' },
+                    { id: 'C004', title: 'Water Supply Issue', status: 'Resolved', date: '2 weeks ago', icon: 'fa-check-circle', color: 'green' },
+                    { id: 'C005', title: 'Noise Complaint', status: 'Rejected', date: '3 weeks ago', icon: 'fa-times-circle', color: 'red' }
+                ];
+
+                const timelineContainer = document.getElementById('statusTimeline');
+                timelineContainer.innerHTML = timeline.map(item => `
+                    <div class="flex items-start space-x-4 border-l-4 border-${item.color}-500 pl-4 py-2">
+                        <div class="p-2 rounded-full bg-${item.color}-100 text-${item.color}-600">
+                            <i class="fas ${item.icon}"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="font-bold text-gray-800">${item.title}</p>
+                                    <p class="text-sm text-gray-600">ID: ${item.id}</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="px-3 py-1 text-xs rounded-full bg-${item.color}-100 text-${item.color}-800">
+                                        ${item.status}
+                                    </span>
+                                    <p class="text-xs text-gray-500 mt-1">${item.date}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error('Error loading tracking data:', error);
+            }
+        }
+
+        // Load volunteer data
+        async function loadVolunteerData() {
+            // Update metrics
+            document.getElementById('volVerifiedToday').textContent = Math.floor(Math.random() * 10) + 3;
+            document.getElementById('volTotalVerified').textContent = Math.floor(Math.random() * 50) + 25;
+            document.getElementById('volPending').textContent = Math.floor(Math.random() * 15) + 5;
+
+            // Load complaints to verify
+            const complaints = [
+                { id: 'C123', title: 'Broken Street Light on Main St', location: 'Main Street', date: '2 hours ago', priority: 'High', desc: 'Street light has been out for 3 days' },
+                { id: 'C124', title: 'Garbage Not Collected', location: 'Park Avenue', date: '5 hours ago', priority: 'Medium', desc: 'Garbage bins overflowing' },
+                { id: 'C125', title: 'Large Pothole on Highway', location: 'Highway 5', date: '1 day ago', priority: 'High', desc: 'Dangerous pothole causing accidents' },
+                { id: 'C126', title: 'Water Leakage', location: 'Downtown', date: '2 days ago', priority: 'Medium', desc: 'Water pipe leaking' }
+            ];
+
+            const container = document.getElementById('complaintsToVerify');
+            container.innerHTML = complaints.map(c => `
+                <div class="border rounded-lg p-4 hover:shadow-md transition">
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex-1">
+                            <h3 class="font-bold text-gray-800">${c.title}</h3>
+                            <p class="text-sm text-gray-600 mt-1">ID: ${c.id} | Location: ${c.location}</p>
+                            <p class="text-sm text-gray-500 mt-1">${c.desc}</p>
+                        </div>
+                        <span class="px-3 py-1 text-xs rounded-full ${c.priority === 'High' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'}">
+                            ${c.priority}
+                        </span>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-3"><i class="fas fa-clock mr-1"></i>${c.date}</p>
+                    <div class="flex space-x-2">
+                        <button onclick="verifyComplaint('${c.id}', true)" class="flex-1 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">
+                            <i class="fas fa-check mr-2"></i>Verify as Valid
+                        </button>
+                        <button onclick="verifyComplaint('${c.id}', false)" class="flex-1 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+                            <i class="fas fa-times mr-2"></i>Mark as Invalid
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Load verification history
+            const history = [
+                { id: 'C120', title: 'Water Leakage Fixed', status: 'Verified', date: 'Yesterday', result: 'Valid' },
+                { id: 'C119', title: 'Traffic Signal Repair', status: 'Verified', date: '2 days ago', result: 'Valid' },
+                { id: 'C118', title: 'Park Maintenance Request', status: 'Rejected', date: '3 days ago', result: 'Invalid' },
+                { id: 'C117', title: 'Noise Complaint', status: 'Verified', date: '4 days ago', result: 'Valid' }
+            ];
+
+            const historyContainer = document.getElementById('verificationHistory');
+            historyContainer.innerHTML = history.map(h => `
+                <div class="flex justify-between items-center py-3 border-b last:border-0">
+                    <div>
+                        <h4 class="font-bold text-gray-800">${h.title}</h4>
+                        <p class="text-sm text-gray-600">ID: ${h.id}</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="px-2 py-1 text-xs rounded-full ${h.result === 'Valid' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                            ${h.result}
+                        </span>
+                        <p class="text-xs text-gray-500 mt-1">${h.date}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Verify complaint function
+        function verifyComplaint(complaintId, isValid) {
+            const status = isValid ? 'Valid' : 'Invalid';
+            if (confirm(`Are you sure you want to mark complaint ${complaintId} as ${status}?`)) {
+                alert(`Complaint ${complaintId} marked as ${status}!\n\nThank you for your contribution.`);
+                loadVolunteerData(); // Reload data
+            }
+        }
+
+        // Reapply as volunteer
+        function reapplyVolunteer() {
+            localStorage.removeItem(`volunteerStatus_${username}`);
+            localStorage.removeItem(`volunteerRejectionReason_${username}`);
+            showSection('volunteer');
+        }
+
+        // Load initial data
+        loadMyComplaints();
+    </script>
+</body>
+</html>

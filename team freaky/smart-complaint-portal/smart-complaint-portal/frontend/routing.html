@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Routing & Escalation - Smart Complaint Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-blue-600 text-white p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="bg-white text-blue-600 font-bold text-xl p-2 rounded">SC</div>
+                    <h1 class="text-2xl font-bold">Smart Complaint Portal</h1>
+                </div>
+                <nav>
+                    <a href="dashboard.html" class="bg-white text-blue-600 px-4 py-2 rounded hover:bg-gray-100">Dashboard</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto px-4 py-8">
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Routing & Escalation</h2>
+                    <div>
+                        <input type="text" placeholder="Search complaints..." class="px-4 py-2 border border-gray-300 rounded-md">
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Complaint ID</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Level</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assigned Dept</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SLA Time Left</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <!-- Sample rows - in a real app, these would come from the API -->
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">CMP-001</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Urgent</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Public Works</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-red-600 h-2 rounded-full" style="width: 15%"></div>
+                                    </div>
+                                    <div class="text-red-600 font-medium">4h 32m</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">At-Risk</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <button class="text-blue-600 hover:text-blue-900 mr-3">Assign</button>
+                                    <button class="text-orange-600 hover:text-orange-900 mr-3">Escalate</button>
+                                    <button class="text-gray-600 hover:text-gray-900">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">CMP-002</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">High</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Sanitation</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-yellow-500 h-2 rounded-full" style="width: 45%"></div>
+                                    </div>
+                                    <div class="text-yellow-600 font-medium">1d 12h</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">On-Track</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <button class="text-blue-600 hover:text-blue-900 mr-3">Assign</button>
+                                    <button class="text-orange-600 hover:text-orange-900 mr-3">Escalate</button>
+                                    <button class="text-gray-600 hover:text-gray-900">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">CMP-003</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Normal</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Utilities</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 78%"></div>
+                                    </div>
+                                    <div class="text-green-600 font-medium">4d 18h</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">On-Track</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <button class="text-blue-600 hover:text-blue-900 mr-3">Assign</button>
+                                    <button class="text-orange-600 hover:text-orange-900 mr-3">Escalate</button>
+                                    <button class="text-gray-600 hover:text-gray-900">View</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="mt-6 flex items-center justify-between">
+                    <div class="text-sm text-gray-700">
+                        Showing <span class="font-medium">1</span> to <span class="font-medium">3</span> of <span class="font-medium">3</span> results
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="px-4 py-2 text-sm bg-gray-200 rounded hover:bg-gray-300">Previous</button>
+                        <button class="px-4 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700">Next</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg hidden">
+            <div class="flex items-center">
+                <span>Complaint forwarded successfully!</span>
+                <button id="undoBtn" class="ml-4 underline">Undo (5:00)</button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white p-4">
+            <div class="container mx-auto text-center">
+                <p>&copy; 2025 Smart Complaint Portal. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+
+        // Toast functionality
+        const toast = document.getElementById('toast');
+        const undoBtn = document.getElementById('undoBtn');
+
+        // Show toast when forward action is taken
+        document.querySelectorAll('button.text-blue-600').forEach(button => {
+            button.addEventListener('click', function() {
+                toast.classList.remove('hidden');
+                let timeLeft = 300; // 5 minutes in seconds
+                
+                const timer = setInterval(() => {
+                    timeLeft--;
+                    const minutes = Math.floor(timeLeft / 60);
+                    const seconds = timeLeft % 60;
+                    undoBtn.textContent = `Undo (${minutes}:${seconds < 10 ? '0' : ''}${seconds})`;
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        toast.classList.add('hidden');
+                    }
+                }, 1000);
+            });
+        });
+
+        // Undo functionality
+        undoBtn.addEventListener('click', function() {
+            toast.classList.add('hidden');
+            alert('Forward action undone successfully!');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+        <script>
+        // Form submission
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const fullname = document.getElementById('fullname').value;
+            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const role = document.getElementById('role').value;
+            const terms = document.getElementById('terms').checked;
+            
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            // Validate role selection
+            if (!role) {
+                alert('Please select a role');
+                return;
+            }
+            
+            // Validate terms acceptance
+            if (!terms) {
+                alert('Please accept the terms and conditions');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalContent = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Creating Account...';
+            submitBtn.disabled = true;
+            
+            // Send registration data to backend API
+            fetch('http://localhost:8001/api/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    username: username, 
+                    email: email,
+                    password: password,
+                    full_name: fullname,
+                    phone_number: null
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Registration failed');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Store login state
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userId', data.user_id);
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('userRole', data.role);
+                localStorage.setItem('username', data.username);
+                localStorage.setItem('userFullName', data.full_name);
+                
+                // Show success and redirect based on role
+                alert(`Account created successfully!\n\nWelcome ${fullname}!\nRole: ${role.toUpperCase()}`);
+                                    
+                if (role === 'admin') {
+                    window.location.href = 'admin_dashboard.html';
+                } else {
+                    window.location.href = 'user_dashboard.html';
+                }
+            })
+            .catch(error => {
+                console.error('Registration error:', error);
+                alert('Registration failed. Please try again.');
+                submitBtn.innerHTML = originalContent;
+                submitBtn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>

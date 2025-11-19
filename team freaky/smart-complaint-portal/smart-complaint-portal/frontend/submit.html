@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Complaint - Smart Complaint Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-blue-600 text-white p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="bg-white text-blue-600 font-bold text-xl p-2 rounded">SC</div>
+                    <h1 class="text-2xl font-bold">Smart Complaint Portal</h1>
+                </div>
+                <nav>
+                    <a href="dashboard.html" class="bg-white text-blue-600 px-4 py-2 rounded hover:bg-gray-100">Dashboard</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto px-4 py-8">
+            <div class="bg-white rounded-lg shadow p-6 max-w-4xl mx-auto">
+                <h2 class="text-2xl font-bold mb-6">Submit a Complaint</h2>
+                
+                <form id="complaintForm" class="space-y-6">
+                    <div>
+                        <label for="citizenName" class="block text-sm font-medium text-gray-700 mb-1">Citizen Name</label>
+                        <input type="text" id="citizenName" name="citizenName" required
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div>
+                        <label for="location" class="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="latitude" class="block text-xs text-gray-500 mb-1">Latitude</label>
+                                <input type="text" id="latitude" name="latitude" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label for="longitude" class="block text-xs text-gray-500 mb-1">Longitude</label>
+                                <input type="text" id="longitude" name="longitude" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Complaint Description</label>
+                        <textarea id="description" name="description" rows="5" required
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                        <select id="category" name="category" required
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Select a category</option>
+                            <option value="sanitation">Sanitation</option>
+                            <option value="traffic">Traffic</option>
+                            <option value="infrastructure">Infrastructure</option>
+                            <option value="public_safety">Public Safety</option>
+                            <option value="utilities">Utilities</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Auto Category Prediction</label>
+                        <div id="predictionResult" class="bg-blue-50 p-4 rounded-md">
+                            <div class="flex justify-between">
+                                <span>Predicted Category:</span>
+                                <span id="predictedCategory" class="font-medium">-</span>
+                            </div>
+                            <div class="flex justify-between mt-2">
+                                <span>Confidence:</span>
+                                <span id="confidenceScore" class="font-medium">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="attachments" class="block text-sm font-medium text-gray-700 mb-1">Upload Evidence</label>
+                        <input type="file" id="attachments" name="attachments" multiple
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <p class="text-xs text-gray-500 mt-1">You can upload multiple files (images, documents)</p>
+                    </div>
+
+                    <div>
+                        <button type="submit"
+                            class="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                            Submit Complaint
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white p-4">
+            <div class="container mx-auto text-center">
+                <p>&copy; 2025 Smart Complaint Portal. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+
+        // Simulate ML prediction
+        document.getElementById('description').addEventListener('input', function() {
+            const description = this.value;
+            if (description.length > 10) {
+                // Simulate ML prediction with random values
+                const categories = ['Sanitation', 'Traffic', 'Infrastructure', 'Public Safety'];
+                const predictedCategory = categories[Math.floor(Math.random() * categories.length)];
+                const confidenceScore = (Math.random() * 0.39 + 0.60).toFixed(2); // Between 0.60 and 0.99
+                
+                document.getElementById('predictedCategory').textContent = predictedCategory;
+                document.getElementById('confidenceScore').textContent = confidenceScore;
+            } else {
+                document.getElementById('predictedCategory').textContent = '-';
+                document.getElementById('confidenceScore').textContent = '-';
+            }
+        });
+
+        // Form submission
+        document.getElementById('complaintForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const formData = new FormData(this);
+            
+            // In a real app, you would send this to your backend API
+            // For demo purposes, we'll show a success message
+            alert('Complaint submitted successfully! Complaint ID: ' + Math.random().toString(36).substring(2, 10));
+            this.reset();
+            document.getElementById('predictedCategory').textContent = '-';
+            document.getElementById('confidenceScore').textContent = '-';
+        });
+    </script>
+</body>
+</html>

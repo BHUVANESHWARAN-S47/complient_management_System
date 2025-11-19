@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Complaint Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white shadow-sm">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-bold text-2xl p-3 rounded-xl shadow-lg">
+                            <i class="fas fa-shield-alt"></i> SC
+                        </div>
+                        <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-700 bg-clip-text text-transparent">
+                            Smart Complaint Portal
+                        </h1>
+                    </div>
+                    <nav class="hidden md:flex space-x-6">
+                        <a href="#" class="text-gray-600 hover:text-blue-600 font-medium transition duration-300">Home</a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 font-medium transition duration-300">Features</a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 font-medium transition duration-300">How It Works</a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 font-medium transition duration-300">Contact</a>
+                    </nav>
+                    <div class="flex space-x-3">
+                        <a href="login.html" class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-2 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                            <i class="fas fa-sign-in-alt mr-2"></i>Login
+                        </a>
+                        <button class="md:hidden text-gray-600">
+                            <i class="fas fa-bars text-2xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content without Sidebar -->
+        <main class="flex-1">
+
+        <!-- Hero Section -->
+        <section class="py-16 md:py-24 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+            <div class="container mx-auto px-4 text-center">
+                <div class="max-w-3xl mx-auto">
+                    <h2 class="text-4xl md:text-6xl font-bold mb-6 animate-pulse">
+                        AI-Powered Complaints & Prevention System
+                    </h2>
+                    <p class="text-xl md:text-2xl mb-10 opacity-90">
+                        Streamline complaint handling with intelligent automation, duplication detection, and proactive resolution.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="submit.html" class="bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition duration-300 shadow-lg transform hover:scale-105">
+                            <i class="fas fa-paper-plane mr-2"></i>Submit a Complaint
+                        </a>
+                        <a href="#features" class="bg-transparent border-2 border-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-blue-600 transition duration-300">
+                            <i class="fas fa-lightbulb mr-2"></i>Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="text-center p-6 bg-blue-50 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+                        <div class="text-4xl font-bold text-blue-600 mb-2">1,248</div>
+                        <div class="text-gray-600">Complaints Resolved</div>
+                    </div>
+                    <div class="text-center p-6 bg-green-50 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+                        <div class="text-4xl font-bold text-green-600 mb-2">89%</div>
+                        <div class="text-gray-600">Resolution Rate</div>
+                    </div>
+                    <div class="text-center p-6 bg-purple-50 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+                        <div class="text-4xl font-bold text-purple-600 mb-2">2.3<span class="text-lg">days</span></div>
+                        <div class="text-gray-600">Avg. Resolution Time</div>
+                    </div>
+                    <div class="text-center p-6 bg-indigo-50 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+                        <div class="text-4xl font-bold text-indigo-600 mb-2">92%</div>
+                        <div class="text-gray-600">User Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Powerful Features</h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                        Our AI-powered system transforms how complaints are handled, making the process efficient and transparent.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <!-- Spam Filtering -->
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+                        <div class="h-2 bg-gradient-to-r from-red-500 to-orange-500"></div>
+                        <div class="p-8">
+                            <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mb-6">
+                                <i class="fas fa-filter text-red-500 text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Spam Filtering</h3>
+                            <p class="text-gray-600 mb-6">
+                                Automatically detect and filter out spam complaints using machine learning algorithms.
+                            </p>
+                            <div class="flex items-center text-red-500 font-medium">
+                                <span>AI-Powered Detection</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ML Classification -->
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+                        <div class="h-2 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
+                        <div class="p-8">
+                            <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-6">
+                                <i class="fas fa-brain text-blue-500 text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">ML Classification</h3>
+                            <p class="text-gray-600 mb-6">
+                                Intelligently categorize complaints into appropriate departments for faster resolution.
+                            </p>
+                            <div class="flex items-center text-blue-500 font-medium">
+                                <span>Smart Categorization</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recurrence Detection -->
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+                        <div class="h-2 bg-gradient-to-r from-green-500 to-teal-500"></div>
+                        <div class="p-8">
+                            <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-6">
+                                <i class="fas fa-recycle text-green-500 text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Recurrence Detection</h3>
+                            <p class="text-gray-600 mb-6">
+                                Identify recurring complaint patterns to address root causes and prevent future issues.
+                            </p>
+                            <div class="flex items-center text-green-500 font-medium">
+                                <span>Pattern Recognition</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">How It Works</h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                        Our streamlined process ensures your complaints are handled efficiently and effectively.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-6">
+                            <span class="text-2xl font-bold text-blue-600">1</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Submit</h3>
+                        <p class="text-gray-600">
+                            Citizens submit complaints through our user-friendly portal with detailed information.
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 rounded-full bg-indigo-100 flex items-center justify-center mx-auto mb-6">
+                            <span class="text-2xl font-bold text-indigo-600">2</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Analyze</h3>
+                        <p class="text-gray-600">
+                            Our AI analyzes the complaint, filters spam, and categorizes it appropriately.
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 rounded-full bg-purple-100 flex items-center justify-center mx-auto mb-6">
+                            <span class="text-2xl font-bold text-purple-600">3</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Route</h3>
+                        <p class="text-gray-600">
+                            Complaints are automatically routed to the correct department with SLA tracking.
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
+                            <span class="text-2xl font-bold text-green-600">4</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Resolve</h3>
+                        <p class="text-gray-600">
+                            Departments resolve complaints and provide updates to citizens in real-time.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-16 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Complaint Management?</h2>
+                <p class="text-xl mb-10 max-w-2xl mx-auto opacity-90">
+                    Join thousands of organizations using our AI-powered platform to streamline their complaint handling process.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="submit.html" class="bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition duration-300 shadow-lg transform hover:scale-105">
+                        <i class="fas fa-rocket mr-2"></i>Get Started
+                    </a>
+                    <a href="#" class="bg-transparent border-2 border-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-blue-600 transition duration-300">
+                        <i class="fas fa-calendar-alt mr-2"></i>Schedule a Demo
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-12">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-bold text-xl p-2 rounded-lg">
+                                <i class="fas fa-shield-alt"></i> SC
+                            </div>
+                            <h3 class="text-xl font-bold">Smart Complaint Portal</h3>
+                        </div>
+                        <p class="text-gray-400 mb-6">
+                            AI-powered complaint management system for efficient and transparent governance.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-white">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-6">Features</h4>
+                        <ul class="space-y-3">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Spam Filtering</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">ML Classification</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Recurrence Detection</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">SLA Management</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Analytics</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-6">Resources</h4>
+                        <ul class="space-y-3">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Documentation</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">API Reference</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Tutorials</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Blog</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Support</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-6">Contact</h4>
+                        <ul class="space-y-3 text-gray-400">
+                            <li class="flex items-start">
+                                <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
+                                <span>123 Government Avenue, City, State 12345</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-phone mt-1 mr-3"></i>
+                                <span>+1 (555) 123-4567</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-envelope mt-1 mr-3"></i>
+                                <span>info@smartcomplaintportal.gov</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-400">
+                    <p>&copy; 2025 Smart Complaint Portal. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>
